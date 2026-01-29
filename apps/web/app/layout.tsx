@@ -1,160 +1,75 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
-import { notFound } from "next/navigation";
-import "../globals.css";
+import Link from "next/link";
+import { getMessages } from "@/lib/i18n";
 
-/* ======================
-   Fonts (performance)
-====================== */
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-/* ======================
-   i18n locales (TYPED)
-====================== */
-const locales = ["fr", "en", "es", "it", "ar", "de"] as const;
-type Locale = (typeof locales)[number];
-
-const defaultLocale: Locale = "fr";
-
-/* ======================
-   SEO content (typed)
-====================== */
-const seoContent: Record<
-  Locale,
-  { title: string; description: string }
-> = {
-  fr: {
-    title: "Mounta – Assistant IA Objectifs & Vie",
-    description:
-      "Mounta est un assistant IA proactif pour la planification stratégique, le suivi d’objectifs et le journaling intelligent.",
-  },
-  en: {
-    title: "Mounta – AI Assistant for Goals & Life",
-    description:
-      "Mounta is a proactive AI assistant for strategic planning, goal tracking, and intelligent journaling.",
-  },
-  es: {
-    title: "Mounta – Asistente IA de Metas y Vida",
-    description:
-      "Mounta es un asistente de IA proactivo para la planificación estratégica, el seguimiento de objetivos y el journaling inteligente.",
-  },
-  it: {
-    title: "Mounta – Assistente IA per Obiettivi e Vita",
-    description:
-      "Mounta è un assistente IA proattivo per la pianificazione strategica, il monitoraggio degli obiettivi e il journaling intelligente.",
-  },
-  ar: {
-    title: "ماونتا – مساعد ذكاء اصطناعي للأهداف والحياة",
-    description:
-      "ماونتا هو مساعد ذكي استباقي للتخطيط الاستراتيجي، تتبع الأهداف، والتدوين الذكي.",
-  },
-  de: {
-    title: "Mounta – KI-Assistent für Ziele & Leben",
-    description:
-      "Mounta ist ein proaktiver KI-Assistent für strategische Planung, Zielverfolgung und intelligentes Journaling.",
-  },
-};
-
-/* ======================
-   Metadata (SEO SSR)
-====================== */
-export async function generateMetadata({
+export default function Home({
   params,
 }: {
-  params: { locale: string };
-}): Promise<Metadata> {
-  const locale: Locale = locales.includes(params.locale as Locale)
-    ? (params.locale as Locale)
-    : defaultLocale;
-
-  const seo = seoContent[locale];
-
-  return {
-    metadataBase: new URL("https://mounta.io"),
-
-    title: {
-      default: seo.title,
-      template: "%s | Mounta",
-    },
-
-    description: seo.description,
-
-    alternates: {
-      canonical: `/${locale}`,
-      languages: {
-        fr: "/fr",
-        en: "/en",
-        es: "/es",
-        it: "/it",
-        ar: "/ar",
-        de: "/de",
-      },
-    },
-
-    openGraph: {
-      title: seo.title,
-      description: seo.description,
-      url: `https://mounta.io/${locale}`,
-      siteName: "Mounta",
-      locale,
-      type: "website",
-    },
-
-    twitter: {
-      card: "summary_large_image",
-      title: seo.title,
-      description: seo.description,
-    },
-
-    robots: {
-      index: true,
-      follow: true,
-    },
-  };
-}
-
-/* ======================
-   Root Layout
-====================== */
-export default async function RootLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
   params: { locale: string };
 }) {
-  if (!locales.includes(params.locale as Locale)) {
-    notFound();
-  }
-
-  const locale = params.locale as Locale;
-
-  const messages = (
-    await import(`../../messages/${locale}.json`)
-  ).default;
-
-  const isRTL = locale === "ar";
+  const t = getMessages(params.locale);
+  const locale = params.locale;
 
   return (
-    <html lang={locale} dir={isRTL ? "rtl" : "ltr"} suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <main className="bg-white text-gray-900">
+      {/* HERO */}
+      <section className="py-28 text-center max-w-6xl mx-auto px-6">
+        <h1 className="text-6xl font-bold mb-6">
+          {t.hero_title}
+        </h1>
+
+        <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10">
+          {t.hero_subtitle}
+        </p>
+
+        <div className="flex justify-center gap-4">
+          <Link href={`/${locale}/pricing`} className="btn-primary">
+            {t.cta_secondary}
+          </Link>
+          <Link href={`/${locale}/demo`} className="btn-secondary">
+            Demo
+          </Link>
+        </div>
+      </section>
+
+      {/* PROBLEM */}
+      <section className="bg-gray-50 py-24 text-center">
+        <h2 className="text-3xl font-semibold mb-6">
+          {t.problem_title}
+        </h2>
+        <ul className="text-lg text-gray-600 space-y-2">
+          <li>❌ {t.problem_1}</li>
+          <li>❌ {t.problem_2}</li>
+          <li>❌ {t.problem_3}</li>
+        </ul>
+      </section>
+
+      {/* FEATURES */}
+      <section className="py-28 max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+        {[
+          t.feature_1,
+          t.feature_2,
+          t.feature_3,
+          t.feature_4,
+          t.feature_5,
+        ].map((f) => (
+          <div key={f} className="p-8 border rounded-2xl shadow-sm">
+            <h3 className="text-xl font-semibold">{f}</h3>
+          </div>
+        ))}
+      </section>
+
+      {/* CTA */}
+      <section className="py-32 text-center bg-white">
+        <h2 className="text-4xl font-bold mb-6">
+          {t.cta_final}
+        </h2>
+        <Link
+          href={`/${locale}/pricing`}
+          className="btn-primary text-lg px-10 py-4"
+        >
+          {t.cta_primary}
+        </Link>
+      </section>
+    </main>
   );
 }
