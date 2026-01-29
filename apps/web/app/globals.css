@@ -1,17 +1,19 @@
 @import "tailwindcss";
 
+/* =========================
+   Design tokens (Tailwind v4)
+   ========================= */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
+/* Dark mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -19,8 +21,29 @@
   }
 }
 
+/* Base styles */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================
+   Components (IMPORTANT)
+   ========================= */
+@layer components {
+  .btn-primary {
+    @apply bg-blue-500 text-white px-6 py-3 rounded-xl font-semibold
+           hover:bg-blue-600 transition;
+  }
+
+  .btn-secondary {
+    @apply border px-6 py-3 rounded-xl
+           hover:bg-gray-50 transition;
+  }
+
+  .input {
+    @apply w-full border rounded-lg px-4 py-3
+           focus:outline-none focus:ring-2 focus:ring-blue-400;
+  }
 }
