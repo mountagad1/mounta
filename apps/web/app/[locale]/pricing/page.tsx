@@ -1,84 +1,68 @@
-"use client";
+import PricingCard from "../../../components/pricing/PricingCard";
+import { getMessages } from "../../../lib/i18n";
 
-import { useState } from "react";
-import PricingCard from "@/components/PricingCard";
+export const metadata = {
+  title: "Pricing – mounta.io",
+  description: "Simple and transparent pricing plans for mounta.io",
+};
 
-const PLANS = [
-  {
-    name: "Starter",
-    monthly: 9,
-    plan: "starter",
-  },
-  {
-    name: "Pro",
-    monthly: 19,
-    plan: "pro",
-    highlighted: true,
-  },
-  {
-    name: "Elite",
-    monthly: 39,
-    plan: "elite",
-  },
-];
-
-export default function Pricing() {
-  const [billing, setBilling] = useState<"monthly" | "annual">("monthly");
-
-  const getPrice = (monthly: number) => {
-    if (billing === "monthly") return monthly;
-    return Math.round(monthly * 12 * 0.9); // 10% discount
-  };
+export default function PricingPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const { locale } = params;
+  const t = getMessages(locale);
 
   return (
-    <main className="py-24 max-w-6xl mx-auto px-6">
-      <h1 className="text-4xl font-bold text-center mb-6">
-        Simple pricing
-      </h1>
+    <main className="max-w-6xl mx-auto px-6 py-28 text-gray-900">
+      {/* HEADER */}
+      <header className="text-center mb-20">
+        <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          {t.pricing_title}
+        </h1>
+        <p className="text-lg text-gray-600">
+          Choose the plan that fits your ambition.
+        </p>
+      </header>
 
-      <p className="text-center text-gray-600 mb-12">
-        Save 10% with annual billing
-      </p>
+      {/* PRICING GRID */}
+      <section className="grid md:grid-cols-3 gap-10">
+        <PricingCard
+          name={t.starter}
+          price="9€"
+          description="Simple goals & daily clarity"
+          plan="starter"
+        />
 
-      {/* Billing toggle */}
-      <div className="flex justify-center mb-16">
-        <div className="flex items-center bg-gray-100 rounded-full p-1">
-          <button
-            onClick={() => setBilling("monthly")}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition ${
-              billing === "monthly"
-                ? "bg-white shadow"
-                : "text-gray-500"
-            }`}
-          >
-            Monthly
-          </button>
+        <PricingCard
+          name={t.pro}
+          price="19€"
+          description="Creators, freelancers & focus builders"
+          plan="pro"
+          highlighted
+        />
 
-          <button
-            onClick={() => setBilling("annual")}
-            className={`px-5 py-2 rounded-full text-sm font-medium transition ${
-              billing === "annual"
-                ? "bg-white shadow"
-                : "text-gray-500"
-            }`}
-          >
-            Annual (-10%)
-          </button>
-        </div>
-      </div>
+        <PricingCard
+          name={t.elite}
+          price="39€"
+          description="Entrepreneurs & high-impact leaders"
+          plan="elite"
+        />
+      </section>
 
-      <div className="grid md:grid-cols-3 gap-10">
-        {PLANS.map((plan) => (
-          <PricingCard
-            key={plan.plan}
-            name={plan.name}
-            price={`${getPrice(plan.monthly)}€`}
-            billing={billing}
-            plan={plan.plan}
-            highlighted={plan.highlighted}
-          />
-        ))}
-      </div>
+      {/* FOOTER CTA */}
+      <section className="text-center mt-32">
+        <h2 className="text-3xl font-bold mb-6">
+          {t.cta_final}
+        </h2>
+        <a
+          href={`/${locale}`}
+          className="btn-secondary inline-block"
+        >
+          Back to home
+        </a>
+      </section>
     </main>
   );
 }

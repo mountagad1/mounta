@@ -1,0 +1,17 @@
+# OS
+.DS_Store
+
+# Node
+node_modules
+.env*
+.next
+
+# Monorepo safety
+/apps/**/.next
+/apps/**/node_modules
+
+# Ignore accidental root files for web
+package-lock.json
+package.json
+tailwind.config.js
+postcss.config.js
