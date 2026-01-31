@@ -1,88 +1,47 @@
-import { getMessages } from "../../lib/i18n";
+// app/[locale]/page.tsx
+import Link from "next/link";
+import type { Metadata } from "next";
 
-type PricingCardProps = {
-  name: string;
-  price: string;
-  description?: string;
-  plan: string;
-  highlighted?: boolean;
+export const metadata: Metadata = {
+  title: "mounta.io — AI Life & Goal Manager",
+  description:
+    "A proactive AI Life & Goal Manager that turns your goals into daily strategic decisions.",
 };
 
-function PricingCard({ name, price, description, plan, highlighted }: PricingCardProps) {
-  return (
-    <article
-      className={`border rounded-lg p-6 text-center ${highlighted ? "shadow-xl border-blue-300 bg-white" : "bg-white/80"}`}
-    >
-      <h3 className="text-xl font-semibold mb-2">{name}</h3>
-      <p className="text-3xl font-bold mb-2">{price}</p>
-      <p className="text-sm text-gray-600 mb-4">{description}</p>
-      <div className="mt-4">
-        <a href={`/subscribe/${plan}`} className={`inline-block px-4 py-2 rounded ${highlighted ? "bg-blue-600 text-white" : "border"}`}>
-          Choose
-        </a>
-      </div>
-    </article>
-  );
-}
-
-
-export default function PricingPage({
+export default function HomePage({
   params,
 }: {
   params: { locale: string };
 }) {
   const { locale } = params;
-  const t = getMessages(locale);
 
   return (
-    <main className="max-w-6xl mx-auto px-6 py-28 text-gray-900">
-      {/* HEADER */}
-      <header className="text-center mb-20">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">
-          {t.pricing_title}
-        </h1>
-        <p className="text-lg text-gray-600">
-          Choose the plan that fits your ambition.
-        </p>
-      </header>
+    <section className="max-w-6xl mx-auto px-6 py-24 text-center">
+      <h1 className="text-5xl md:text-6xl font-bold mb-6">
+        Don’t manage tasks.
+        <span className="block text-blue-500">Manage your life.</span>
+      </h1>
 
-      {/* PRICING GRID */}
-      <section className="grid md:grid-cols-3 gap-10">
-        <PricingCard
-          name={t.starter}
-          price="9€"
-          description="Simple goals & daily clarity"
-          plan="starter"
-        />
+      <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10">
+        mounta.io is a proactive AI Life & Goal Manager that transforms your
+        goals into daily strategic decisions.
+      </p>
 
-        <PricingCard
-          name={t.pro}
-          price="19€"
-          description="Creators, freelancers & focus builders"
-          plan="pro"
-          highlighted
-        />
-
-        <PricingCard
-          name={t.elite}
-          price="39€"
-          description="Entrepreneurs & high-impact leaders"
-          plan="elite"
-        />
-      </section>
-
-      {/* FOOTER CTA */}
-      <section className="text-center mt-32">
-        <h2 className="text-3xl font-bold mb-6">
-          {t.cta_final}
-        </h2>
-        <a
-          href={`/${locale}`}
-          className="btn-secondary inline-block"
+      <div className="flex justify-center gap-4">
+        <Link
+          href={`/${locale}/pricing`}
+          className="px-8 py-4 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition"
         >
-          Back to home
-        </a>
-      </section>
-    </main>
+          View pricing
+        </Link>
+
+        <Link
+          href={`/${locale}/demo`}
+          className="px-8 py-4 rounded-xl border font-semibold hover:bg-gray-50 transition"
+        >
+          See demo
+        </Link>
+      </div>
+    </section>
   );
 }
