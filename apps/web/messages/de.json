@@ -1,26 +1,20 @@
 {
-  "hero_title": "Verwalten Sie nicht Aufgaben. Verwalten Sie Ihr Leben.",
-  "hero_subtitle": "Eine proaktive KI, die Ihre Ziele in tägliche strategische Entscheidungen umsetzt.",
-  "cta_primary": "Frühzugang",
-  "cta_secondary": "Preise ansehen",
+  "hero_title": "Verwalte keine Aufgaben.",
+  "hero_highlight": "Gestalte dein Leben.",
+  "hero_subtitle": "mounta.io ist ein proaktiver KI-Lebensassistent, der Ziele in tägliche strategische Entscheidungen verwandelt.",
+  "cta_start": "Jetzt starten",
+  "cta_pricing": "Preise ansehen",
 
-  "problem_title": "Sie sind beschäftigt, kommen aber nicht voran.",
-  "problem_1": "To-do-Listen verstehen Ihre Ziele nicht",
-  "problem_2": "KI-Chats vergessen Ihr Leben",
+  "problem_title": "Du bist beschäftigt, kommst aber nicht voran.",
+  "problem_1": "To-do-Listen verstehen deine Ziele nicht",
+  "problem_2": "KI-Chats vergessen dein Leben",
   "problem_3": "Produktivitätstools ignorieren die Realität",
 
-  "features_title": "Eine neue Kategorie der Lebensorganisation",
-  "feature_1": "Strategische Lebenskarte™",
-  "feature_2": "Proaktive Planungs-KI",
-  "feature_3": "Intelligentes Lebensjournal™",
-  "feature_4": "Menschlicher Beziehungs-Motor™",
-  "feature_5": "Lebensleistungs-Analyse™",
+  "how_title": "So funktioniert mounta",
+  "step_1": "Definiere, was wichtig ist",
+  "step_2": "Erstelle deine strategische Lebenskarte",
+  "step_3": "Proaktive Planung",
+  "step_4": "Reflektieren und verbessern",
 
-  "pricing_title": "Einfache und transparente Preise",
-  "starter": "Starter",
-  "pro": "Pro",
-  "elite": "Elite",
-
-  "cta_final": "Ihr Leben verdient eine Strategie."
+  "final_cta": "Dein Leben verdient Strategie."
 }
-

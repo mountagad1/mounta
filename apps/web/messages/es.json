@@ -1,26 +1,20 @@
 {
-  "hero_title": "No gestiones tareas. Gestiona tu vida.",
-  "hero_subtitle": "Una IA proactiva que convierte tus objetivos en decisiones estratégicas diarias.",
-  "cta_primary": "Acceso anticipado",
-  "cta_secondary": "Ver precios",
+  "hero_title": "No gestiones tareas.",
+  "hero_highlight": "Gestiona tu vida.",
+  "hero_subtitle": "mounta.io es un asistente de vida con IA proactiva que convierte tus objetivos en decisiones estratégicas diarias.",
+  "cta_start": "Empezar",
+  "cta_pricing": "Ver precios",
 
   "problem_title": "Estás ocupado, pero no avanzas.",
   "problem_1": "Las listas de tareas no entienden tus objetivos",
   "problem_2": "Los chats de IA olvidan tu vida",
   "problem_3": "Las herramientas de productividad ignoran la realidad",
 
-  "features_title": "Una nueva forma de gestionar tu vida",
-  "feature_1": "Mapa de vida estratégico™",
-  "feature_2": "IA de planificación proactiva",
-  "feature_3": "Diario de vida inteligente™",
-  "feature_4": "Motor de relaciones humanas™",
-  "feature_5": "Análisis del rendimiento vital™",
+  "how_title": "Cómo funciona mounta",
+  "step_1": "Define lo que importa",
+  "step_2": "Construye tu mapa de vida estratégico",
+  "step_3": "Planificación proactiva",
+  "step_4": "Reflexiona y mejora",
 
-  "pricing_title": "Precios simples y transparentes",
-  "starter": "Starter",
-  "pro": "Pro",
-  "elite": "Elite",
-
-  "cta_final": "Tu vida merece una estrategia."
+  "final_cta": "Tu vida merece estrategia."
 }
-
