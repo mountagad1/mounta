@@ -1,44 +1,40 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const locales = ["en", "fr", "de", "es", "it", "ar"];
-const defaultLocale = "en";
+const LOCALES = ["fr", "en", "de", "es", "it", "ar"];
+const DEFAULT_LOCALE = "en";
 
-export function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl;
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
 
-  // Ignore internal paths
+  // Ignore next internal paths
   if (
-    pathname.startsWith("/api") ||
     pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
     pathname.includes(".")
   ) {
     return NextResponse.next();
   }
 
-  // Already localized
-  const hasLocale = locales.some(
-    (locale) =>
-      pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
+  // If already has locale, continue
+  const hasLocale = LOCALES.some(
+    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
   );
 
   if (hasLocale) {
     return NextResponse.next();
   }
 
-  const acceptLanguage = request.headers.get("accept-language") || "";
-  const detectedLocale =
-    acceptLanguage.split(",")[0]?.split("-")[0]?.toLowerCase() ||
-    defaultLocale;
+  // Detect browser language
+  const acceptLang = req.headers.get("accept-language");
+  const browserLang = acceptLang?.split(",")[0].split("-")[0];
 
-  const locale = locales.includes(detectedLocale)
-    ? detectedLocale
-    : defaultLocale;
+  const locale = LOCALES.includes(browserLang || "")
+    ? browserLang!
+    : DEFAULT_LOCALE;
 
-  return NextResponse.redirect(
-    new URL(`/${locale}`, request.url)
-  );
+  return NextResponse.redirect(new URL(`/${locale}${pathname}`, req.url));
 }
 
 export const config = {
-  matcher: ["/"],
+  matcher: ["/((?!_next|api|.*\\..*).*)"],
 };
