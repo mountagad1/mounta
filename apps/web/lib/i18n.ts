@@ -18,8 +18,5 @@ const messages: Record<Locale, any> = {
 };
 
 export function getMessages(locale: string) {
-  if (!locales.includes(locale as Locale)) {
-    return messages.en;
-  }
-  return messages[locale as Locale];
+  return messages[locale as Locale] ?? messages.en;
 }
