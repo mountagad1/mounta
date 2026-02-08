@@ -1,12 +1,13 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-const LOCALES = ["fr", "en", "de", "es", "it", "ar"];
-const DEFAULT_LOCALE = "en";
+const locales = ["en"];
+const defaultLocale = "en";
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
 
-  // Ignore next internal paths
+  // Ignore internal paths
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -15,26 +16,22 @@ export function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // If already has locale, continue
-  const hasLocale = LOCALES.some(
-    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
+  // If locale already exists, continue
+  const hasLocale = locales.some(
+    (locale) =>
+      pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
   );
 
   if (hasLocale) {
     return NextResponse.next();
   }
 
-  // Detect browser language
-  const acceptLang = req.headers.get("accept-language");
-  const browserLang = acceptLang?.split(",")[0].split("-")[0];
-
-  const locale = LOCALES.includes(browserLang || "")
-    ? browserLang!
-    : DEFAULT_LOCALE;
-
-  return NextResponse.redirect(new URL(`/${locale}${pathname}`, req.url));
+  // Redirect / → /en
+  const url = request.nextUrl.clone();
+  url.pathname = `/${defaultLocale}${pathname}`;
+  return NextResponse.redirect(url);
 }
 
 export const config = {
-  matcher: ["/((?!_next|api|.*\\..*).*)"],
+  matcher: ["/((?!_next|api|favicon.ico).*)"],
 };
