@@ -11,10 +11,10 @@ export async function generateMetadata({
   return {
     title: isFr
       ? "Mounta – Assistant de vie IA"
-      : "Mounta – AI Life & Goal Assistant",
+      : "Mounta – AI Goal & Life Assistant",
     description: isFr
-      ? "Transformez vos objectifs en actions quotidiennes avec l’IA."
-      : "Turn goals into daily actions with an AI-powered life assistant.",
+      ? "Transformez vos objectifs en actions quotidiennes."
+      : "Turn goals into daily actions with AI.",
   };
 }
 
@@ -23,11 +23,5 @@ export default function LocaleLayout({
 }: {
   children: ReactNode;
 }) {
-  return (
-    <html>
-      <body className="min-h-screen bg-white text-gray-900 antialiased">
-        {children}
-      </body>
-    </html>
-  );
+  return <div className="min-h-screen">{children}</div>;
 }

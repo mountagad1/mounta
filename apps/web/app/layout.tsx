@@ -1,18 +1,10 @@
+import "./globals.css";
 import type { ReactNode } from "react";
 
-export const metadata = {
-  title: "Mounta",
-  description: "Your AI-powered goal & life assistant",
-};
-
-export default function RootLayout({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ margin: 0, fontFamily: "system-ui, sans-serif" }}>
+      <body className="bg-white text-gray-900 antialiased">
         {children}
       </body>
     </html>
