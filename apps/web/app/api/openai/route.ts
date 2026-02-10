@@ -2,26 +2,14 @@ import OpenAI from "openai";
 import { NextResponse } from "next/server";
 
 /**
- * Runtime:
- * - nodejs is required for the OpenAI SDK
- * - NOT edge
+ * Required for OpenAI SDK
  */
 export const runtime = "nodejs";
 
 /**
- * Force dynamic rendering (API route)
+ * Force dynamic execution
  */
 export const dynamic = "force-dynamic";
-
-/**
- * OpenAI client
- * Make sure OPENAI_API_KEY is set in:
- * - .env.local (local)
- * - Vercel → Project Settings → Environment Variables
- */
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 /**
  * POST /api/openai
@@ -29,6 +17,18 @@ const openai = new OpenAI({
  */
 export async function POST(req: Request) {
   try {
+    const apiKey = process.env.OPENAI_API_KEY;
+
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: "OPENAI_API_KEY is not set" },
+        { status: 500 }
+      );
+    }
+
+    // ✅ Create client INSIDE request
+    const openai = new OpenAI({ apiKey });
+
     const { prompt } = await req.json();
 
     if (!prompt) {
