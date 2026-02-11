@@ -1,15 +1,8 @@
 import { NextResponse } from "next/server";
-import { sql } from "@vercel/postgres";
+import { supabaseServer } from "@/lib/supabase/server";
 
-/**
- * Runtime: nodejs (required for Vercel Postgres)
- */
 export const runtime = "nodejs";
 
-/**
- * POST /api/waitlist
- * Body: { email: string }
- */
 export async function POST(req: Request) {
   try {
     const { email } = await req.json();
@@ -21,15 +14,18 @@ export async function POST(req: Request) {
       );
     }
 
-    await sql`
-      INSERT INTO waitlist (email)
-      VALUES (${email})
-      ON CONFLICT DO NOTHING
-    `;
+    const { error } = await supabaseServer
+      .from("waitlist")
+      .insert({ email });
+
+    // Ignore duplicate email error
+    if (error && error.code !== "23505") {
+      throw error;
+    }
 
     return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error("Waitlist error:", error);
+  } catch (err) {
+    console.error("Waitlist error:", err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
