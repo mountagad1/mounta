@@ -6,6 +6,14 @@ export const metadata: Metadata = {
   description:
     "Mounta is an AI execution assistant that helps you move from intention to results — one realistic action at a time.",
   manifest: "/manifest.json",
+  
+  // 🎨 Icons & Favicon Configuration
+  icons: {
+    icon: "/favicon.ico",                    // 32x32 - navigateur
+    shortcut: "/favicon-64.ico",             // 64x64 - onglets haute-res
+    apple: "/apple-touch-icon-180.png",      // 180x180 - iOS home screen
+  },
+  
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -34,11 +42,16 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        {/* PWA iOS */}
-        <link rel="apple-touch-icon" href="/icon-192.png" />
+        {/* PWA Icons & Favicon */}
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" type="image/x-icon" href="/favicon-64.ico" sizes="64x64" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon-180.png" sizes="180x180" />
+        
+        {/* Meta tags PWA */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Mounta" />
+        
         {/* Fonts preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

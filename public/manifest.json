@@ -3,9 +3,10 @@
   "short_name": "Mounta",
   "description": "Turn goals into daily action. Your AI execution partner.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#0c0a09",
-  "theme_color": "#0c0a09",
+  "theme_color": "#06b6d4",
   "orientation": "portrait-primary",
   "categories": ["productivity", "lifestyle"],
   "icons": [
@@ -20,6 +21,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-touch-icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "screenshots": [
