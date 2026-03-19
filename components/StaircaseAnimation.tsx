@@ -12,16 +12,17 @@ export default function StaircaseAnimation() {
 
     const STEP_W = 62;
     const STEP_H = 36;
-    const TOTAL_STEPS = 10; // number of visible static steps
+    const TOTAL_STEPS = 10; // nombre total d'escaliers visibles
 
-    // Figure speed in steps per second
+    // Vitesse du personnage en escaliers par seconde
     const SPEED = 0.9;
 
-    // figPos goes from 0 to TOTAL_STEPS, then resets to 0 (loop)
+    // figPos va de 0 à TOTAL_STEPS (le personnage s'arrête en haut)
     let figPos = 0;
     let walkPhase = 0;
     let lastTime = 0;
     let raf: number;
+    let hasCompleted = false; // ← Flag pour arrêter après une montée complète
 
     function resize() {
       const rect = canvas!.parentElement!.getBoundingClientRect();
@@ -35,16 +36,16 @@ export default function StaircaseAnimation() {
     const W = () => canvas!.parentElement!.getBoundingClientRect().width;
     const H = () => canvas!.parentElement!.getBoundingClientRect().height;
 
-    // Draw all stairs statically, anchored to bottom-left
+    // ✅ Dessiner les escaliers une seule fois (statique)
     function drawStairs(w: number, h: number) {
-      const baseX = w * 0.08; // left anchor
-      const baseY = h - 55;   // ground level
+      const baseX = w * 0.08; // ancrage gauche
+      const baseY = h - 55;   // niveau du sol
 
       for (let i = 0; i < TOTAL_STEPS; i++) {
         const sx = baseX + i * STEP_W;
         const sy = baseY - i * STEP_H;
 
-        // Tread (top face)
+        // Tread (surface supérieure)
         const treadGrad = ctx!.createLinearGradient(sx, sy - 4, sx, sy + STEP_H * 0.3);
         treadGrad.addColorStop(0, "rgba(255,255,255,0.92)");
         treadGrad.addColorStop(1, "rgba(200,225,248,0.75)");
@@ -53,7 +54,7 @@ export default function StaircaseAnimation() {
         ctx!.fillStyle = treadGrad;
         ctx!.fill();
 
-        // Riser (front face)
+        // Riser (face avant)
         const riserGrad = ctx!.createLinearGradient(sx, sy, sx + STEP_W * 0.15, sy);
         riserGrad.addColorStop(0, "rgba(190,219,255,0.85)");
         riserGrad.addColorStop(1, "rgba(147,197,253,0.6)");
@@ -62,7 +63,7 @@ export default function StaircaseAnimation() {
         ctx!.fillStyle = riserGrad;
         ctx!.fill();
 
-        // Top edge line
+        // Ligne du haut
         ctx!.beginPath();
         ctx!.moveTo(sx, sy);
         ctx!.lineTo(sx + STEP_W, sy);
@@ -70,7 +71,7 @@ export default function StaircaseAnimation() {
         ctx!.lineWidth = 1.5;
         ctx!.stroke();
 
-        // Left edge line
+        // Ligne gauche
         ctx!.beginPath();
         ctx!.moveTo(sx, sy);
         ctx!.lineTo(sx, sy + STEP_H);
@@ -78,7 +79,7 @@ export default function StaircaseAnimation() {
         ctx!.lineWidth = 0.8;
         ctx!.stroke();
 
-        // Step number every 5 steps
+        // Numéro tous les 5 escaliers
         if (i > 0 && i % 5 === 0) {
           ctx!.fillStyle = "rgba(37,99,235,0.45)";
           ctx!.font = "500 10px DM Sans, sans-serif";
@@ -87,7 +88,7 @@ export default function StaircaseAnimation() {
         }
       }
 
-      // Ground
+      // Sol
       ctx!.beginPath();
       ctx!.rect(0, h - 55, w, 55);
       const groundGrad = ctx!.createLinearGradient(0, h - 55, 0, h);
@@ -101,7 +102,7 @@ export default function StaircaseAnimation() {
       ctx!.save();
       ctx!.translate(x, y - bob * 3);
 
-      // Shadow
+      // Ombre
       ctx!.beginPath();
       ctx!.ellipse(2, 4, 10, 3, 0, 0, Math.PI * 2);
       ctx!.fillStyle = "rgba(37,99,235,0.12)";
@@ -112,7 +113,7 @@ export default function StaircaseAnimation() {
       ctx!.lineWidth = 2.8;
       ctx!.lineCap = "round";
 
-      // Back leg
+      // Jambe arrière
       ctx!.beginPath();
       ctx!.moveTo(0, 0);
       const bkx = Math.sin((legSwing2 * Math.PI) / 180) * 12;
@@ -122,7 +123,7 @@ export default function StaircaseAnimation() {
       ctx!.strokeStyle = "#2563eb";
       ctx!.stroke();
 
-      // Front leg
+      // Jambe avant
       ctx!.beginPath();
       ctx!.moveTo(0, 0);
       const fkx = Math.sin((legSwing * Math.PI) / 180) * 12;
@@ -132,7 +133,7 @@ export default function StaircaseAnimation() {
       ctx!.strokeStyle = "#1e40af";
       ctx!.stroke();
 
-      // Torso
+      // Torse
       ctx!.beginPath();
       ctx!.moveTo(0, 0);
       ctx!.lineTo(0, -18);
@@ -140,7 +141,7 @@ export default function StaircaseAnimation() {
       ctx!.lineWidth = 3.2;
       ctx!.stroke();
 
-      // Arms
+      // Bras
       const armSwing = Math.sin(phase + Math.PI) * 18;
       const armSwing2 = Math.sin(phase) * 18;
       ctx!.lineWidth = 2.2;
@@ -161,7 +162,7 @@ export default function StaircaseAnimation() {
       ctx!.strokeStyle = "#1e40af";
       ctx!.stroke();
 
-      // Head
+      // Tête
       ctx!.beginPath();
       ctx!.arc(0, -24, 7, 0, Math.PI * 2);
       ctx!.fillStyle = "#fde68a";
@@ -170,7 +171,7 @@ export default function StaircaseAnimation() {
       ctx!.lineWidth = 1.2;
       ctx!.stroke();
 
-      // Hair
+      // Cheveux
       ctx!.beginPath();
       ctx!.arc(0, -28, 5, Math.PI, 0);
       ctx!.fillStyle = "#92400e";
@@ -192,7 +193,7 @@ export default function StaircaseAnimation() {
       ctx!.fillStyle = "#1e40af";
       ctx!.font = "600 11px DM Sans, sans-serif";
       ctx!.textAlign = "center";
-      ctx!.fillText("Step " + Math.max(1, Math.floor(step) % TOTAL_STEPS || TOTAL_STEPS), 0, -2);
+      ctx!.fillText("Step " + Math.ceil(step), 0, -2);
       ctx!.restore();
     }
 
@@ -214,9 +215,33 @@ export default function StaircaseAnimation() {
       figPos += SPEED * dt;
       walkPhase += SPEED * dt * Math.PI * 3.2;
 
-      // Loop: reset figure to bottom when it reaches the top
+      // ✅ Arrêter quand le personnage atteint le haut
       if (figPos >= TOTAL_STEPS) {
-        figPos = 0;
+        figPos = TOTAL_STEPS;
+        hasCompleted = true;
+        
+        // Dessiner une dernière fois et ARRÊTER
+        const bob = Math.abs(Math.sin(walkPhase)) * 0.5;
+        const w = W();
+        const h = H();
+        const baseX = w * 0.08;
+        const baseY = h - 55;
+        const figX = baseX + figPos * STEP_W + STEP_W * 0.5;
+        const figY = baseY - figPos * STEP_H;
+
+        ctx!.clearRect(0, 0, w, h);
+        const bg = ctx!.createLinearGradient(0, 0, w, h);
+        bg.addColorStop(0, "rgba(219,234,254,0.4)");
+        bg.addColorStop(1, "rgba(240,249,255,0.2)");
+        ctx!.fillStyle = bg;
+        ctx!.fillRect(0, 0, w, h);
+
+        drawStairs(w, h);
+        drawTrail(figX, figY);
+        drawFigure(figX, figY - 20, walkPhase, bob);
+        drawProgressBadge(figX, figY - 58, figPos);
+        
+        return; // ← STOP ANIMATION HERE
       }
 
       const bob = Math.abs(Math.sin(walkPhase)) * 0.5;
@@ -226,20 +251,20 @@ export default function StaircaseAnimation() {
       const baseX = w * 0.08;
       const baseY = h - 55;
 
-      // Figure position follows the step grid
+      // Position du personnage suit la grille des escaliers
       const figX = baseX + figPos * STEP_W + STEP_W * 0.5;
       const figY = baseY - figPos * STEP_H;
 
       ctx!.clearRect(0, 0, w, h);
 
-      // Background
+      // Fond
       const bg = ctx!.createLinearGradient(0, 0, w, h);
       bg.addColorStop(0, "rgba(219,234,254,0.4)");
       bg.addColorStop(1, "rgba(240,249,255,0.2)");
       ctx!.fillStyle = bg;
       ctx!.fillRect(0, 0, w, h);
 
-      drawStairs(w, h);
+      drawStairs(w, h); // ← Escaliers STATIQUES
       drawTrail(figX, figY);
       drawFigure(figX, figY - 20, walkPhase, bob);
       drawProgressBadge(figX, figY - 58, figPos);
