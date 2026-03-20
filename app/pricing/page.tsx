@@ -67,7 +67,7 @@ export default function PricingPage() {
                 key={plan.id}
                 className="card flex flex-col p-6 relative transition-all duration-300"
                 style={{
-                  borderColor: plan.highlighted ? "rgba(251,191,36,0.4)" : "var(--border)",
+                  borderColor: plan.highlighted ? "rgba(255, 183, 2, 0.95)" : "var(--border)",
                   background: plan.highlighted ? "var(--accent-glow)" : "var(--bg-card)",
                   transform: plan.highlighted ? "scale(1.02)" : "scale(1)",
                 }}

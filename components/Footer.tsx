@@ -8,12 +8,11 @@ export default function Footer() {
     >
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex items-center gap-2.5">
-          <div
-            className="w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold"
-            style={{ background: "var(--accent)", color: "#0c0a09" }}
-          >
-            M
-          </div>
+         <img
+  src="/logo.png"
+  alt="Mounta logo"
+  className="w-6 h-6 rounded-md object-contain"
+/>
           <span className="font-display text-sm" style={{ color: "var(--text-muted)" }}>
             mounta.io
           </span>
