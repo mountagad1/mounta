@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
@@ -20,25 +21,27 @@ export default function Navbar() {
           ? "rgba(12,10,9,0.92)"
           : "transparent",
         backdropFilter: scrolled ? "blur(16px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(255, 255, 255, 0.06)" : "none",
       }}
     >
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
-          <div
-            className="w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold transition-transform group-hover:scale-110"
-            style={{ background: "var(--accent)", color: "#0c0a09" }}
-          >
-            M
-          </div>
-          <span
-            className="font-display font-semibold text-lg tracking-tight"
-            style={{ color: "var(--text)" }}
-          >
-            mounta
-          </span>
-        </Link>
+  <Image
+    src="/logo.png"
+    alt="Mounta logo"
+    width={28}
+    height={28}
+    className="rounded-lg transition-transform group-hover:scale-110"
+  />
+
+  <span
+    className="font-display font-semibold text-lg tracking-tight"
+    style={{ color: "var(--text)" }}
+  >
+    mounta
+  </span>
+</Link>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-8">
@@ -99,7 +102,7 @@ export default function Navbar() {
       {menuOpen && (
         <div
           className="md:hidden px-6 pb-6 flex flex-col gap-4"
-          style={{ background: "rgba(12,10,9,0.97)", borderBottom: "1px solid var(--border)" }}
+          style={{ background: "#fefefef7", borderBottom: "1px solid var(--border)" }}
         >
           <Link href="/#how-it-works" className="text-sm py-2" style={{ color: "var(--text-muted)" }} onClick={() => setMenuOpen(false)}>
             How it works
