@@ -11,7 +11,7 @@ export default function Footer() {
          <img
   src="/logo.png"
   alt="Mounta logo"
-  className="w-6 h-6 rounded-md object-contain"
+  className="w-16 h-16 rounded-md object-contain"
 />
           <span className="font-display text-sm" style={{ color: "var(--text-muted)" }}>
             mounta.io

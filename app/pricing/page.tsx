@@ -67,7 +67,7 @@ export default function PricingPage() {
                 key={plan.id}
                 className="card flex flex-col p-6 relative transition-all duration-300"
                 style={{
-                  borderColor: plan.highlighted ? "rgba(255, 183, 2, 0.95)" : "var(--border)",
+                  borderColor: plan.highlighted ? "rgba(240, 239, 238, 0.95)" : "var(--border)",
                   background: plan.highlighted ? "var(--accent-glow)" : "var(--bg-card)",
                   transform: plan.highlighted ? "scale(1.02)" : "scale(1)",
                 }}
@@ -141,7 +141,7 @@ export default function PricingPage() {
                   className="w-full py-3 rounded-xl text-sm font-medium transition-all duration-200"
                   style={
                     plan.highlighted
-                      ? { background: "var(--accent)", color: "#0c0a09" }
+                      ? { background: "var(--accent)", color: "#e6e6e6" }
                       : {
                           background: "var(--bg-elevated)",
                           color: "var(--text)",

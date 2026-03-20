@@ -6,16 +6,16 @@
 
 :root {
   --bg: #ffffff;
-  --bg-elevated: #ffffff;
+  --bg-elevated: #000000;
   --bg-card: #1e1b18;
   --border: rgba(4, 21, 210, 0.08);
   --border-strong: rgba(255,255,255,0.15);
   --text: #ffffff;
-  --text-muted: #000000;
-  --text-subtle: #000000;
-  --accent: #6b03ed;
-  --accent-dim: rgba(0, 0, 0, 0.15);
-  --accent-glow: rgba(0, 0, 0, 0.08);
+  --text-muted: #ffffff;
+  --text-subtle: #ffffff;
+  --accent: rgba(73, 116, 210, 0.733);
+  --accent-dim: rgba(151, 108, 162, 0.15);
+  --accent-glow: rgba(76, 129, 219, 0.355);
   --green: #86efac;
   --red: #fca5a5;
   --radius: 12px;
@@ -36,7 +36,7 @@ html {
 body {
   background: linear-gradient(175deg,#5bb8f5 0%,#89cff0 18%,#b8e0f7 38%,#d6eefa 55%,#e8f6fd 72%,#f0f9ff 100%);
   background-attachment: fixed;
-  color: var(--dark, #0b0f83);
+  color: var(--dark, #0b0fcbdb);
   font-family: 'DM Sans', system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.6;
@@ -79,7 +79,7 @@ body::before {
   color: #0c0a09;
 }
 .btn-primary:hover {
-  background: #6b03e2;
+  background: #0c22cbdb;
   transform: translateY(-1px);
   box-shadow: 0 8px 24px rgba(251,191,36,0.25);
 }

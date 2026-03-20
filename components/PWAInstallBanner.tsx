@@ -62,12 +62,11 @@ export default function PWAInstallBanner() {
         marginBottom: "calc(env(safe-area-inset-bottom, 0px) + 16px)",
       }}
     >
-      <div
-        className="w-10 h-10 rounded-xl flex items-center justify-center text-lg font-bold flex-shrink-0"
-        style={{ background: "var(--accent)", color: "#0c0a09" }}
-      >
-        M
-      </div>
+          <img
+  src="/logo.png"
+  alt="Mounta logo"
+  className="w-8 h-8 rounded-md object-contain"
+/>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium" style={{ color: "var(--text)" }}>
           Add Mounta to home screen

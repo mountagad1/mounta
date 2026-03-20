@@ -2,10 +2,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import WaitlistForm from "@/components/WaitlistForm";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 20);
@@ -13,25 +15,44 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+
   return (
     <nav
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
         background: scrolled
-          ? "rgba(12,10,9,0.92)"
+          ? "rgba(255, 255, 255, 0.92)"
           : "transparent",
         backdropFilter: scrolled ? "blur(16px)" : "none",
         borderBottom: scrolled ? "1px solid rgba(255, 255, 255, 0.06)" : "none",
       }}
     >
+      {openModal && (
+  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div className="bg-black p-6 rounded-xl w-full max-w-md">
+      
+      <button
+        onClick={() => setOpenModal(false)}
+        className="mb-4 text-sm text-gray-400"
+      >
+        Close
+      </button>
+
+      <h2 className="text-lg mb-4">Join the waitlist</h2>
+
+      <WaitlistForm size="large" />
+
+    </div>
+  </div>
+)}
       <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 group">
   <Image
     src="/logo.png"
     alt="Mounta logo"
-    width={28}
-    height={28}
+    width={78}
+    height={78}
     className="rounded-lg transition-transform group-hover:scale-110"
   />
 
@@ -110,9 +131,9 @@ export default function Navbar() {
           <Link href="/pricing" className="text-sm py-2" style={{ color: "var(--text-muted)" }} onClick={() => setMenuOpen(false)}>
             Pricing
           </Link>
-          <Link href="/pricing" className="btn-primary text-sm w-full justify-center" onClick={() => setMenuOpen(false)}>
-            Join waitlist
-          </Link>
+          <button onClick={() => setOpenModal(true)} className="btn-primary">
+  Join waitlist
+</button>
         </div>
       )}
     </nav>
