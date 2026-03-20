@@ -5,17 +5,18 @@
 @tailwind utilities;
 
 :root {
-  --bg: #ffffff;
+  --bg: #000000;
   --bg-elevated: #000000;
   --bg-card: #1e1b18;
   --border: rgba(4, 21, 210, 0.08);
   --border-strong: rgba(255,255,255,0.15);
   --text: #ffffff;
-  --text-muted: #ffffff;
+  --text-muted: #000000;
   --text-subtle: #ffffff;
-  --accent: rgba(73, 116, 210, 0.733);
+  --accent: #0e169dda;
   --accent-dim: rgba(151, 108, 162, 0.15);
-  --accent-glow: rgba(76, 129, 219, 0.355);
+  --accent: #0e169dda;
+  --accent-glow: #171abbc8;
   --green: #86efac;
   --red: #fca5a5;
   --radius: 12px;

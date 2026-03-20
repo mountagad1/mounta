@@ -21,7 +21,7 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
         background: scrolled
-          ? "rgba(255, 255, 255, 0.92)"
+          ? "rgba(0, 0, 0, 0.92)"
           : "transparent",
         backdropFilter: scrolled ? "blur(16px)" : "none",
         borderBottom: scrolled ? "1px solid rgba(255, 255, 255, 0.06)" : "none",
@@ -60,7 +60,7 @@ export default function Navbar() {
     className="font-display font-semibold text-lg tracking-tight"
     style={{ color: "var(--text)" }}
   >
-    mounta
+    Mounta
   </span>
 </Link>
 
@@ -98,7 +98,7 @@ export default function Navbar() {
           <span
             className="block w-5 h-0.5 transition-all duration-200"
             style={{
-              background: "var(--text-muted)",
+              background: "var(--text)",
               transform: menuOpen ? "rotate(45deg) translate(2px, 2px)" : "none",
             }}
           />

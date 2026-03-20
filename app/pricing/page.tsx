@@ -36,7 +36,7 @@ export default function PricingPage() {
                 className="px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200"
                 style={{
                   background: billing === b ? "var(--accent)" : "transparent",
-                  color: billing === b ? "#0c0a09" : "var(--text-muted)",
+                  color: billing === b ? "#ffffff" : "var(--text-muted)",
                 }}
               >
                 {b === "monthly" ? "Monthly" : "Annual"}
@@ -44,8 +44,8 @@ export default function PricingPage() {
                   <span
                     className="ml-2 text-xs px-1.5 py-0.5 rounded-md font-semibold"
                     style={{
-                      background: billing === "annual" ? "rgba(0,0,0,0.2)" : "var(--accent-dim)",
-                      color: billing === "annual" ? "#0c0a09" : "var(--accent)",
+                      background: billing === "annual" ? "#59565633" : "var(--accent-dim)",
+                      color: billing === "annual" ? "#111010" : "var(--accent)",
                     }}
                   >
                     -10%
