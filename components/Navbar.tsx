@@ -21,7 +21,7 @@ export default function Navbar() {
       className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       style={{
         background: scrolled
-          ? "rgba(0, 0, 0, 0.92)"
+          ? "rgba(255, 255, 255, 0.92)"
           : "transparent",
         backdropFilter: scrolled ? "blur(16px)" : "none",
         borderBottom: scrolled ? "1px solid rgba(255, 255, 255, 0.06)" : "none",
@@ -58,7 +58,7 @@ export default function Navbar() {
 
   <span
     className="font-display font-semibold text-lg tracking-tight"
-    style={{ color: "var(--text)" }}
+    style={{ color: "var(--text-muted)" }}
   >
     Mounta
   </span>

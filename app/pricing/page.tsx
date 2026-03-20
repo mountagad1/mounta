@@ -35,7 +35,7 @@ export default function PricingPage() {
                 onClick={() => setBilling(b)}
                 className="px-5 py-2 rounded-lg text-sm font-medium transition-all duration-200"
                 style={{
-                  background: billing === b ? "var(--accent)" : "transparent",
+                  background: billing === b ? "var(--text)" : "transparent",
                   color: billing === b ? "#ffffff" : "var(--text-muted)",
                 }}
               >
@@ -44,8 +44,8 @@ export default function PricingPage() {
                   <span
                     className="ml-2 text-xs px-1.5 py-0.5 rounded-md font-semibold"
                     style={{
-                      background: billing === "annual" ? "#59565633" : "var(--accent-dim)",
-                      color: billing === "annual" ? "#111010" : "var(--accent)",
+                      background: billing === "annual" ? "#fff4f433" : "var(--text",
+                      color: billing === "annual" ? "#111010" : "var(--text)",
                     }}
                   >
                     -10%
@@ -75,7 +75,7 @@ export default function PricingPage() {
                 {plan.highlighted && (
                   <div
                     className="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold px-3 py-1 rounded-full"
-                    style={{ background: "var(--accent)", color: "#0c0a09" }}
+                    style={{ background: "var(--accent)", color: "#ffffff" }}
                   >
                     Most popular
                   </div>

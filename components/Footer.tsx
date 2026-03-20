@@ -14,7 +14,7 @@ export default function Footer() {
   className="w-16 h-16 rounded-md object-contain"
 />
           <span className="font-display text-sm" style={{ color: "var(--text-muted)" }}>
-            mounta.io
+            Mounta.io
           </span>
         </div>
 
@@ -30,7 +30,7 @@ export default function Footer() {
           </Link>
         </div>
 
-        <p className="text-xs" style={{ color: "var(--text-subtle)" }}>
+        <p className="text-xs" style={{ color: "var(--text-muted)" }}>
           © 2025 Mounta. Execution over motivation.
         </p>
       </div>
