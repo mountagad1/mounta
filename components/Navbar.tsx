@@ -15,127 +15,188 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
-
   return (
-    <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-      style={{
-        background: scrolled
-          ? "rgba(255, 255, 255, 0.92)"
-          : "transparent",
-        backdropFilter: scrolled ? "blur(16px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(255, 255, 255, 0.06)" : "none",
-      }}
-    >
-      {openModal && (
-  <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-    <div className="bg-black p-6 rounded-xl w-full max-w-md">
-      
-      <button
-        onClick={() => setOpenModal(false)}
-        className="mb-4 text-sm text-gray-400"
+    <>
+      <nav
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        style={{
+          background: scrolled
+            ? "rgba(255, 255, 255, 0.95)"
+            : "rgba(255, 255, 255, 0.75)",
+          backdropFilter: "blur(20px)",
+          borderBottom: scrolled 
+            ? "1px solid var(--border)" 
+            : "1px solid transparent",
+          boxShadow: scrolled ? "var(--shadow-md)" : "none",
+        }}
       >
-        Close
-      </button>
+        <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+          
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative overflow-hidden rounded-xl transition-transform group-hover:scale-105">
+              <Image
+                src="/logo.png"
+                alt="Mounta logo"
+                width={52}
+                height={52}
+                className="rounded-xl"
+                style={{ 
+                  boxShadow: "var(--shadow-sm)",
+                  border: "1px solid rgba(255,255,255,0.5)"
+                }}
+              />
+            </div>
+            <span
+              className="font-display font-bold text-xl tracking-tight transition-colors"
+              style={{ color: "var(--text)" }}
+            >
+              Mounta
+            </span>
+          </Link>
 
-      <h2 className="text-lg mb-4">Join the waitlist</h2>
+          {/* Desktop navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            <Link
+              href="/#how-it-works"
+              className="text-sm font-semibold transition-colors"
+              style={{ color: "var(--text-muted)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+            >
+              How it works
+            </Link>
+            <Link
+              href="/pricing"
+              className="text-sm font-semibold transition-colors"
+              style={{ color: "var(--text-muted)" }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+            >
+              Pricing
+            </Link>
+            <button 
+              onClick={() => setOpenModal(true)}
+              className="btn-primary text-sm px-6 py-2.5"
+            >
+              Join waitlist
+            </button>
+          </div>
 
-      <WaitlistForm size="large" />
-
-    </div>
-  </div>
-)}
-      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-  <Image
-    src="/logo.png"
-    alt="Mounta logo"
-    width={78}
-    height={78}
-    className="rounded-lg transition-transform group-hover:scale-110"
-  />
-
-  <span
-    className="font-display font-semibold text-lg tracking-tight"
-    style={{ color: "var(--text-muted)" }}
-  >
-    Mounta
-  </span>
-</Link>
-
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-8">
-          <Link
-            href="/#how-it-works"
-            className="text-sm transition-colors"
-            style={{ color: "var(--text-muted)" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden flex flex-col gap-1.5 p-2 rounded-lg transition-colors hover:bg-white/50"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+            aria-expanded={menuOpen}
           >
-            How it works
-          </Link>
-          <Link
-            href="/pricing"
-            className="text-sm transition-colors"
-            style={{ color: "var(--text-muted)" }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
-            onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
-          >
-            Pricing
-          </Link>
-          <Link href="/pricing" className="btn-primary text-sm px-5 py-2">
-            Join waitlist
-          </Link>
+            <span
+              className="block w-6 h-0.5 transition-all duration-200 rounded-full"
+              style={{
+                background: "var(--text)",
+                transform: menuOpen ? "rotate(45deg) translateY(6px)" : "none",
+              }}
+            />
+            <span
+              className="block w-6 h-0.5 transition-all duration-200 rounded-full"
+              style={{
+                background: "var(--text-muted)",
+                opacity: menuOpen ? 0 : 1,
+              }}
+            />
+            <span
+              className="block w-6 h-0.5 transition-all duration-200 rounded-full"
+              style={{
+                background: "var(--text-muted)",
+                transform: menuOpen ? "rotate(-45deg) translateY(-6px)" : "none",
+              }}
+            />
+          </button>
         </div>
 
-        {/* Mobile burger */}
-        <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Menu"
-        >
-          <span
-            className="block w-5 h-0.5 transition-all duration-200"
-            style={{
-              background: "var(--text)",
-              transform: menuOpen ? "rotate(45deg) translate(2px, 2px)" : "none",
+        {/* Mobile menu */}
+        {menuOpen && (
+          <div
+            className="md:hidden border-t animate-slide-up"
+            style={{ 
+              background: "rgba(255,255,255,0.98)", 
+              borderColor: "var(--border)",
+              backdropFilter: "blur(20px)"
             }}
-          />
-          <span
-            className="block w-5 h-0.5 transition-all duration-200"
-            style={{
-              background: "var(--text-muted)",
-              opacity: menuOpen ? 0 : 1,
-            }}
-          />
-          <span
-            className="block w-5 h-0.5 transition-all duration-200"
-            style={{
-              background: "var(--text-muted)",
-              transform: menuOpen ? "rotate(-45deg) translate(2px, -2px)" : "none",
-            }}
-          />
-        </button>
-      </div>
+          >
+            <div className="px-6 py-6 flex flex-col gap-4">
+              <Link 
+                href="/#how-it-works" 
+                className="text-base font-semibold py-2 transition-colors" 
+                style={{ color: "var(--text)" }} 
+                onClick={() => setMenuOpen(false)}
+              >
+                How it works
+              </Link>
+              <Link 
+                href="/pricing" 
+                className="text-base font-semibold py-2 transition-colors" 
+                style={{ color: "var(--text)" }} 
+                onClick={() => setMenuOpen(false)}
+              >
+                Pricing
+              </Link>
+              <button 
+                onClick={() => {
+                  setOpenModal(true);
+                  setMenuOpen(false);
+                }} 
+                className="btn-primary w-full py-3"
+              >
+                Join waitlist
+              </button>
+            </div>
+          </div>
+        )}
+      </nav>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div
-          className="md:hidden px-6 pb-6 flex flex-col gap-4"
-          style={{ background: "#fefefef7", borderBottom: "1px solid var(--border)" }}
+      {/* Waitlist modal */}
+      {openModal && (
+        <div 
+          className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-4 animate-fade-in"
+          onClick={() => setOpenModal(false)}
         >
-          <Link href="/#how-it-works" className="text-sm py-2" style={{ color: "var(--text-muted)" }} onClick={() => setMenuOpen(false)}>
-            How it works
-          </Link>
-          <Link href="/pricing" className="text-sm py-2" style={{ color: "var(--text-muted)" }} onClick={() => setMenuOpen(false)}>
-            Pricing
-          </Link>
-          <button onClick={() => setOpenModal(true)} className="btn-primary">
-  Join waitlist
-</button>
+          <div 
+            className="card-elevated w-full max-w-md p-8 animate-slide-up"
+            onClick={(e) => e.stopPropagation()}
+            style={{ 
+              borderRadius: "var(--radius-2xl)",
+              background: "rgba(255,255,255,0.98)"
+            }}
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h2 
+                className="font-display text-2xl font-bold" 
+                style={{ color: "var(--text)" }}
+              >
+                Join the waitlist
+              </h2>
+              <button
+                onClick={() => setOpenModal(false)}
+                className="text-2xl leading-none p-1 rounded-lg transition-colors hover:bg-white"
+                style={{ color: "var(--text-subtle)" }}
+                aria-label="Close"
+              >
+                ×
+              </button>
+            </div>
+
+            <p 
+              className="text-sm mb-6 font-medium" 
+              style={{ color: "var(--text-muted)" }}
+            >
+              Be the first to know when Mounta launches. Get early access and exclusive updates.
+            </p>
+
+            <WaitlistForm size="large" />
+          </div>
         </div>
       )}
-    </nav>
+    </>
   );
 }
