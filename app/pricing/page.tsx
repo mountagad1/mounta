@@ -214,7 +214,7 @@ export default function PricingPage() {
                 {/* CTA button */}
                 <button
                   className={`w-full py-3.5 rounded-xl text-sm font-bold transition-all duration-200 ${
-                    isHighlighted ? "btn-primary" : ""
+                    isHighlighted ? "btn-primary" : "hover:scale-105"
                   }`}
                   style={
                     isHighlighted
@@ -225,22 +225,6 @@ export default function PricingPage() {
                           border: "2px solid var(--border-accent)",
                         }
                   }
-                  onMouseEnter={(e) => {
-                    if (!isHighlighted) {
-                      e.currentTarget.style.background = "#ffffff";
-                      e.currentTarget.style.borderColor = "var(--accent)";
-                      e.currentTarget.style.transform = "translateY(-2px)";
-                      e.currentTarget.style.boxShadow = "var(--shadow-md)";
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (!isHighlighted) {
-                      e.currentTarget.style.background = "rgba(255,255,255,0.9)";
-                      e.currentTarget.style.borderColor = "var(--border-accent)";
-                      e.currentTarget.style.transform = "translateY(0)";
-                      e.currentTarget.style.boxShadow = "none";
-                    }
-                  }}
                 >
                   {plan.cta}
                 </button>

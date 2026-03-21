@@ -59,10 +59,8 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-sm font-semibold transition-colors hover:underline"
+                className="text-sm font-semibold transition-colors hover:underline hover:text-[var(--accent)]"
                 style={{ color: "var(--text-muted)" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
               >
                 {link.label}
               </Link>
@@ -100,10 +98,8 @@ export default function Footer() {
               href="https://twitter.com/mounta"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-semibold transition-colors hover:underline"
+              className="text-xs font-semibold transition-colors hover:underline hover:text-[var(--accent)]"
               style={{ color: "var(--text-muted)" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
             >
               Twitter
             </a>
@@ -111,10 +107,8 @@ export default function Footer() {
               href="https://linkedin.com/company/mounta"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs font-semibold transition-colors hover:underline"
+              className="text-xs font-semibold transition-colors hover:underline hover:text-[var(--accent)]"
               style={{ color: "var(--text-muted)" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
             >
               LinkedIn
             </a>

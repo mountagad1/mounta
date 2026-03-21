@@ -1,3 +1,4 @@
+"use client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WaitlistForm from "@/components/WaitlistForm";
@@ -442,9 +443,7 @@ export default function Home() {
                   className="card-glass p-7 card-hover group block"
                   style={{ borderRadius: "var(--radius-xl)" }}
                 >
-                  <div 
-                    className="badge badge-accent mb-5"
-                  >
+                  <div className="badge badge-accent mb-5">
                     {post.tag}
                   </div>
                   <h3 

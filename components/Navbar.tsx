@@ -59,19 +59,15 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             <Link
               href="/#how-it-works"
-              className="text-sm font-semibold transition-colors"
+              className="text-sm font-semibold transition-colors hover:text-[var(--accent)]"
               style={{ color: "var(--text-muted)" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
             >
               How it works
             </Link>
             <Link
               href="/pricing"
-              className="text-sm font-semibold transition-colors"
+              className="text-sm font-semibold transition-colors hover:text-[var(--accent)]"
               style={{ color: "var(--text-muted)" }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "var(--accent)")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
             >
               Pricing
             </Link>
@@ -127,7 +123,7 @@ export default function Navbar() {
             <div className="px-6 py-6 flex flex-col gap-4">
               <Link 
                 href="/#how-it-works" 
-                className="text-base font-semibold py-2 transition-colors" 
+                className="text-base font-semibold py-2 transition-colors hover:text-[var(--accent)]" 
                 style={{ color: "var(--text)" }} 
                 onClick={() => setMenuOpen(false)}
               >
@@ -135,7 +131,7 @@ export default function Navbar() {
               </Link>
               <Link 
                 href="/pricing" 
-                className="text-base font-semibold py-2 transition-colors" 
+                className="text-base font-semibold py-2 transition-colors hover:text-[var(--accent)]" 
                 style={{ color: "var(--text)" }} 
                 onClick={() => setMenuOpen(false)}
               >
