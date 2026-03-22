@@ -9,6 +9,11 @@ const FOOTER_LINKS = [
   { label: "Terms", href: "/terms" },
 ];
 
+const SOCIAL_LINKS = [
+  { label: "Twitter", href: "https://twitter.com/mounta" },
+  { label: "LinkedIn", href: "https://linkedin.com/company/mounta" },
+];
+
 export default function Footer() {
   return (
     <footer
@@ -26,13 +31,13 @@ export default function Footer() {
           
           {/* Logo and tagline */}
           <div className="flex flex-col items-center md:items-start gap-3">
-            <div className="flex items-center gap-3">
+            <Link href="/" className="flex items-center gap-3 group">
               <Image
                 src="/logo.png"
                 alt="Mounta logo"
                 width={56}
                 height={56}
-                className="rounded-xl"
+                className="rounded-xl transition-transform group-hover:scale-105"
                 style={{ 
                   boxShadow: "var(--shadow-sm)",
                   border: "1px solid rgba(255,255,255,0.6)"
@@ -44,7 +49,7 @@ export default function Footer() {
               >
                 Mounta
               </span>
-            </div>
+            </Link>
             <p 
               className="text-sm font-semibold text-center md:text-left" 
               style={{ color: "var(--text-muted)" }}
@@ -92,26 +97,20 @@ export default function Footer() {
             © 2025 Mounta. All rights reserved.
           </p>
           
-          {/* Social links (placeholder - add your actual social links) */}
+          {/* Social links */}
           <div className="flex items-center gap-4">
-            <a
-              href="https://twitter.com/mounta"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-semibold transition-colors hover:underline hover:text-[var(--accent)]"
-              style={{ color: "var(--text-muted)" }}
-            >
-              Twitter
-            </a>
-            <a
-              href="https://linkedin.com/company/mounta"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-semibold transition-colors hover:underline hover:text-[var(--accent)]"
-              style={{ color: "var(--text-muted)" }}
-            >
-              LinkedIn
-            </a>
+            {SOCIAL_LINKS.map((social) => (
+              <a
+                key={social.href}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold transition-colors hover:underline hover:text-[var(--accent)]"
+                style={{ color: "var(--text-muted)" }}
+              >
+                {social.label}
+              </a>
+            ))}
           </div>
         </div>
       </div>
